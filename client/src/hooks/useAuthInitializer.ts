@@ -4,6 +4,7 @@ import { useAppDispatch } from "./redux";
 
 import {
   setCredentials,
+  setAccessToken,
   clearCredentials,
 } from "../store/authSlice";
 
@@ -23,6 +24,8 @@ export const useAuthInitializer = () => {
       try {
         const accessToken =
           await refreshAccessToken();
+
+        dispatch(setAccessToken(accessToken));
 
         const user =
           await getCurrentUser();

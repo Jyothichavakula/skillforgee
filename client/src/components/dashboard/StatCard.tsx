@@ -15,27 +15,27 @@ function StatCard({
   icon: Icon,
 }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="group rounded-2xl border border-neutral-800/90 bg-[#121215] p-5.5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-500/5">
       <div className="flex items-center justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 group-hover:bg-yellow-400/20 group-hover:border-yellow-400/40 transition">
           <Icon size={20} />
         </div>
 
         <TrendingUp
           size={17}
-          className="text-slate-300"
+          className="text-yellow-400/60 group-hover:text-yellow-400 transition"
         />
       </div>
 
-      <p className="mt-5 text-sm text-slate-500">
+      <p className="mt-4 text-xs font-medium uppercase tracking-wider text-neutral-400">
         {title}
       </p>
 
-      <p className="mt-1 text-2xl font-bold text-slate-900">
+      <p className="mt-1.5 text-2xl font-bold tracking-tight text-white">
         {value}
       </p>
 
-      <p className="mt-1 text-xs text-slate-400">
+      <p className="mt-1 text-xs text-neutral-400">
         {description}
       </p>
     </div>

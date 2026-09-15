@@ -1,23 +1,37 @@
 import { Router } from "express";
 
 import {
-  createJob,
   getJobs,
+  getMyJobsController,
   getJobById,
+  createJob,
   updateJob,
   deleteJob,
 } from "../controllers/job.controller.js";
-
 import { authenticate } from "../middleware/auth.middleware.js";
 import { authorizeRoles } from "../middleware/role.middleware.js";
 
 const router = Router();
 
 // Authenticated users can view jobs
-router.get("/", authenticate, getJobs);
+router.get(
+  "/my",
+  authenticate,
+  authorizeRoles("RECRUITER", "ADMIN"),
+  getMyJobsController
+);
 
-router.get("/:id", authenticate, getJobById);
+router.get(
+  "/",
+  authenticate,
+  getJobs
+);
 
+router.get(
+  "/:id",
+  authenticate,
+  getJobById
+);
 // Recruiters and admins can create jobs
 router.post(
   "/",

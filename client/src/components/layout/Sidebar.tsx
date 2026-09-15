@@ -12,6 +12,7 @@ import {
   User,
   LogOut,
   X,
+  Sparkles,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -91,7 +92,7 @@ function Sidebar({
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/75 backdrop-blur-xs lg:hidden"
           onClick={onClose}
         />
       )}
@@ -100,8 +101,8 @@ function Sidebar({
       <aside
         className={`
           fixed left-0 top-0 z-50 flex h-screen w-72
-          flex-col border-r border-slate-800
-          bg-slate-950 text-white
+          flex-col border-r border-neutral-800/80
+          bg-[#0c0c0e] text-white
           transition-transform duration-300
           lg:translate-x-0
           ${
@@ -112,21 +113,25 @@ function Sidebar({
         `}
       >
         {/* Logo */}
-        <div className="flex h-20 items-center justify-between border-b border-slate-800 px-6">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">
-              Skill<span className="text-indigo-400">Forge</span>
-            </h1>
-
-            <p className="mt-1 text-xs text-slate-500">
-              Career & Placement Platform
-            </p>
+        <div className="flex h-20 items-center justify-between border-b border-neutral-800/80 px-6">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 shadow-md shadow-yellow-500/20">
+              <Sparkles size={20} className="text-black fill-black" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold tracking-tight text-white">
+                Skill<span className="text-yellow-400">Forge</span>
+              </h1>
+              <p className="text-[11px] font-medium text-neutral-400">
+                Career & Placement Platform
+              </p>
+            </div>
           </div>
 
           {/* Mobile Close */}
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden"
+            className="rounded-lg p-2 text-neutral-400 hover:bg-neutral-800 hover:text-white lg:hidden"
           >
             <X size={20} />
           </button>
@@ -134,11 +139,11 @@ function Sidebar({
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto px-4 py-6">
-          <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-wider text-neutral-500">
             Workspace
           </p>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {navigationItems.map((item) => {
               const Icon = item.icon;
 
@@ -149,18 +154,17 @@ function Sidebar({
                   onClick={onClose}
                   className={({ isActive }) =>
                     `
-                    flex items-center gap-3 rounded-xl px-3 py-3
-                    text-sm font-medium transition
+                    flex items-center gap-3 rounded-xl px-3.5 py-3
+                    text-sm font-medium transition-all duration-150
                     ${
                       isActive
-                        ? "bg-indigo-500/15 text-indigo-400"
-                        : "text-slate-400 hover:bg-slate-900 hover:text-white"
+                        ? "bg-yellow-400/15 text-yellow-400 font-semibold border-l-2 border-yellow-400 shadow-xs"
+                        : "text-neutral-400 hover:bg-neutral-900/90 hover:text-white"
                     }
                     `
                   }
                 >
                   <Icon size={19} />
-
                   <span>{item.name}</span>
                 </NavLink>
               );
@@ -169,33 +173,31 @@ function Sidebar({
         </nav>
 
         {/* Bottom Section */}
-        <div className="border-t border-slate-800 p-4">
+        <div className="border-t border-neutral-800/80 p-4 space-y-1.5">
           <NavLink
             to="/student/profile"
             onClick={onClose}
             className={({ isActive }) =>
               `
-              flex items-center gap-3 rounded-xl px-3 py-3
+              flex items-center gap-3 rounded-xl px-3.5 py-3
               text-sm font-medium transition
               ${
                 isActive
-                  ? "bg-indigo-500/15 text-indigo-400"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-white"
+                  ? "bg-yellow-400/15 text-yellow-400 font-semibold border-l-2 border-yellow-400"
+                  : "text-neutral-400 hover:bg-neutral-900 hover:text-white"
               }
               `
             }
           >
             <User size={19} />
-
             <span>Profile</span>
           </NavLink>
 
           <button
             onClick={handleLogout}
-            className="mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-400 transition hover:bg-red-500/10 hover:text-red-400"
+            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-medium text-neutral-400 transition hover:bg-red-500/10 hover:text-red-400"
           >
             <LogOut size={19} />
-
             <span>Logout</span>
           </button>
         </div>

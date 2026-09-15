@@ -21,41 +21,41 @@ function ProblemCard({
 
   const difficultyClass =
     problem.difficulty === "EASY"
-      ? "bg-green-50 text-green-700"
+      ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
       : problem.difficulty === "MEDIUM"
-      ? "bg-amber-50 text-amber-700"
-      : "bg-red-50 text-red-700";
+      ? "bg-yellow-400/15 text-yellow-400 border border-yellow-400/30"
+      : "bg-red-500/15 text-red-400 border border-red-500/30";
 
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+    <div className="flex h-full flex-col rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-500/5">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+          <p className="text-xs font-semibold uppercase tracking-wider text-yellow-400">
             Coding Problem
           </p>
 
-          <h2 className="mt-1 text-lg font-bold text-slate-900">
+          <h2 className="mt-1 text-lg font-bold tracking-tight text-white">
             {problem.title}
           </h2>
         </div>
 
         <span
-          className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${difficultyClass}`}
+          className={`shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold ${difficultyClass}`}
         >
           {problem.difficulty}
         </span>
       </div>
 
       {/* Description */}
-      <p className="mt-4 line-clamp-3 text-sm leading-6 text-slate-500">
+      <p className="mt-4 line-clamp-3 text-sm leading-6 text-neutral-400">
         {problem.description}
       </p>
 
       {/* Topics */}
       {problem.topics.length > 0 && (
         <div className="mt-5">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-500">
             <Tag size={14} />
             Topics
           </div>
@@ -64,7 +64,7 @@ function ProblemCard({
             {problem.topics.map((topic) => (
               <span
                 key={topic}
-                className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600"
+                className="rounded-lg border border-neutral-800 bg-neutral-900/80 px-2.5 py-1 text-xs font-medium text-neutral-300"
               >
                 {topic}
               </span>
@@ -76,7 +76,7 @@ function ProblemCard({
       {/* Companies */}
       {problem.companyTags.length > 0 && (
         <div className="mt-4">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-500">
             <Building2 size={14} />
             Companies
           </div>
@@ -86,7 +86,7 @@ function ProblemCard({
               (company) => (
                 <span
                   key={company}
-                  className="rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700"
+                  className="rounded-lg border border-yellow-400/20 bg-yellow-400/10 px-2.5 py-1 text-xs font-medium text-yellow-400"
                 >
                   {company}
                 </span>
@@ -104,7 +104,7 @@ function ProblemCard({
               `/student/coding/${problem._id}`
             )
           }
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-600"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-sm font-semibold text-white transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-black shadow-sm"
         >
           View Problem
           <ArrowRight size={17} />

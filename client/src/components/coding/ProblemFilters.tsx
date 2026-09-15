@@ -27,13 +27,13 @@ function ProblemFilters({
   onCompanyChange,
 }: ProblemFiltersProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-neutral-800/90 bg-[#121215] p-5 shadow-sm">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Search */}
         <div>
           <label
             htmlFor="problem-search"
-            className="mb-2 block text-sm font-semibold text-slate-700"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-400"
           >
             Search
           </label>
@@ -46,7 +46,7 @@ function ProblemFilters({
               onSearchChange(event.target.value)
             }
             placeholder="Search problems..."
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
           />
         </div>
 
@@ -54,7 +54,7 @@ function ProblemFilters({
         <div>
           <label
             htmlFor="problem-difficulty"
-            className="mb-2 block text-sm font-semibold text-slate-700"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-400"
           >
             Difficulty
           </label>
@@ -69,7 +69,7 @@ function ProblemFilters({
                   | ""
               )
             }
-            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
           >
             <option value="">
               All Difficulties
@@ -93,7 +93,7 @@ function ProblemFilters({
         <div>
           <label
             htmlFor="problem-topic"
-            className="mb-2 block text-sm font-semibold text-slate-700"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-400"
           >
             Topic
           </label>
@@ -106,7 +106,7 @@ function ProblemFilters({
               onTopicChange(event.target.value)
             }
             placeholder="e.g. ARRAY"
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm uppercase outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white uppercase placeholder-neutral-500 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
           />
         </div>
 
@@ -114,7 +114,7 @@ function ProblemFilters({
         <div>
           <label
             htmlFor="problem-company"
-            className="mb-2 block text-sm font-semibold text-slate-700"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-400"
           >
             Company
           </label>
@@ -126,8 +126,8 @@ function ProblemFilters({
             onChange={(event) =>
               onCompanyChange(event.target.value)
             }
-            placeholder="e.g. HSBC"
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            placeholder="e.g. Google"
+            className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
           />
         </div>
       </div>

@@ -4,9 +4,11 @@ import { AuthenticatedRequest } from "../middleware/auth.middleware.js";
 import {
   createJob as createJobService,
   getJobs as getJobsService,
+  getMyJobs as getMyJobsService,
   getJobById as getJobByIdService,
   updateJob as updateJobService,
   deleteJob as deleteJobService,
+  getMyJobs,
 } from "../services/job.service.js";
 
 import {
@@ -199,5 +201,28 @@ export const deleteJob = async (
   res.status(200).json({
     success: true,
     message: "Job deleted successfully",
+  });
+};
+
+export const getMyJobsController = async (
+  req: AuthenticatedRequest,
+  res: Response
+): Promise<void> => {
+  if (!req.userId) {
+    res.status(401).json({
+      success: false,
+      message: "User authentication required",
+    });
+    return;
+  }
+
+  const jobs = await getMyJobs(req.userId);
+
+  res.status(200).json({
+    success: true,
+    message: "Recruiter jobs retrieved successfully",
+    data: {
+      jobs,
+    },
   });
 };

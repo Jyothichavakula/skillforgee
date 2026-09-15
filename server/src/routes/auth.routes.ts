@@ -1,13 +1,11 @@
 import { Router } from "express";
 
-import { authorizeRoles } from "../middleware/role.middleware.js";
-
 import {
   register,
   login,
+  getMe,
   refresh,
   logout,
-  getMe,
 } from "../controllers/auth.controller.js";
 
 import { authenticate } from "../middleware/auth.middleware.js";
@@ -15,13 +13,52 @@ import { authRateLimiter } from "../middleware/rate-limit.middleware.js";
 
 const router = Router();
 
-router.post("/register", authRateLimiter, register);
-router.post("/login", authRateLimiter, login);
-router.post("/refresh", authRateLimiter, refresh);
-router.post("/logout", authRateLimiter, logout);
+// ========================================
+// REGISTER
+// ========================================
 
-router.get("/me", authenticate, getMe);
+router.post(
+  "/register",
+  authRateLimiter,
+  register
+);
 
+// ========================================
+// LOGIN
+// ========================================
 
+router.post(
+  "/login",
+  authRateLimiter,
+  login
+);
+
+// ========================================
+// CURRENT USER
+// ========================================
+
+router.get(
+  "/me",
+  authenticate,
+  getMe
+);
+
+// ========================================
+// REFRESH ACCESS TOKEN
+// ========================================
+
+router.post(
+  "/refresh",
+  refresh
+);
+
+// ========================================
+// LOGOUT
+// ========================================
+
+router.post(
+  "/logout",
+  logout
+);
 
 export default router;

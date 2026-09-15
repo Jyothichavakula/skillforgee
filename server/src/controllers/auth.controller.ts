@@ -170,6 +170,18 @@ export const refresh = async (
     }
 
 const result = await refreshAccessToken(refreshToken);
+
+    // Store new refresh token in HTTP-only cookie
+    res.cookie("refreshToken", result.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite:
+        process.env.NODE_ENV === "production"
+          ? "none"
+          : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       success: true,
       message: "Access token refreshed successfully",
@@ -206,23 +218,25 @@ export const login = async (
     // Login user
     const result = await loginUser(validatedData);
 
-  res.cookie("refreshToken", result.refreshToken, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite:
-    process.env.NODE_ENV === "production"
-      ? "none"
-      : "lax",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-});
+    // Store refresh token in HTTP-only cookie
+    res.cookie("refreshToken", result.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite:
+        process.env.NODE_ENV === "production"
+          ? "none"
+          : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
-res.status(200).json({
-  success: true,
-  message: "Access token refreshed successfully",
-  data: {
-    accessToken: result.accessToken,
-  },
-});
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      data: {
+        user: result.user,
+        accessToken: result.accessToken,
+      },
+    });
   } catch (error) {
     if (error instanceof Error) {
       res.status(401).json({

@@ -28,7 +28,7 @@ function RoadmapTopicCard({
       return (
         <CheckCircle2
           size={20}
-          className="text-green-600"
+          className="text-yellow-400"
         />
       );
     }
@@ -37,7 +37,7 @@ function RoadmapTopicCard({
       return (
         <Clock3
           size={20}
-          className="text-amber-600"
+          className="text-amber-400"
         />
       );
     }
@@ -45,7 +45,7 @@ function RoadmapTopicCard({
     return (
       <Circle
         size={20}
-        className="text-slate-400"
+        className="text-neutral-600"
       />
     );
   };
@@ -63,15 +63,15 @@ function RoadmapTopicCard({
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+    <div className="group rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm transition hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-500/5">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-lg font-bold text-slate-900">
+          <h3 className="text-lg font-bold tracking-tight text-white group-hover:text-yellow-400 transition">
             {topic.topic}
           </h3>
 
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-400">
             {topic.solvedProblems} of{" "}
             {topic.totalProblems} problems solved
           </p>
@@ -83,18 +83,18 @@ function RoadmapTopicCard({
       {/* Progress */}
       <div className="mt-5">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-medium text-slate-500">
+          <span className="font-medium text-neutral-400">
             Progress
           </span>
 
-          <span className="font-bold text-slate-700">
+          <span className="font-bold text-yellow-400">
             {progress}%
           </span>
         </div>
 
-        <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+        <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-neutral-900 border border-neutral-800">
           <div
-            className="h-full rounded-full bg-indigo-600 transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 shadow-sm shadow-yellow-500/50 transition-all duration-500"
             style={{
               width: `${progress}%`,
             }}
@@ -104,46 +104,46 @@ function RoadmapTopicCard({
 
       {/* Stats */}
       <div className="mt-5 grid grid-cols-3 gap-2">
-        <div className="rounded-xl bg-slate-50 p-3 text-center">
-          <p className="text-lg font-bold text-slate-900">
+        <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/60 p-3 text-center">
+          <p className="text-lg font-bold text-white">
             {topic.totalProblems}
           </p>
 
-          <p className="text-xs text-slate-500">
+          <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">
             Total
           </p>
         </div>
 
-        <div className="rounded-xl bg-slate-50 p-3 text-center">
-          <p className="text-lg font-bold text-green-600">
+        <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/60 p-3 text-center">
+          <p className="text-lg font-bold text-yellow-400">
             {topic.solvedProblems}
           </p>
 
-          <p className="text-xs text-slate-500">
+          <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">
             Solved
           </p>
         </div>
 
-        <div className="rounded-xl bg-slate-50 p-3 text-center">
-          <p className="text-lg font-bold text-amber-600">
+        <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/60 p-3 text-center">
+          <p className="text-lg font-bold text-amber-400">
             {topic.attemptedProblems}
           </p>
 
-          <p className="text-xs text-slate-500">
+          <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">
             Attempted
           </p>
         </div>
       </div>
 
       {/* Status */}
-      <div className="mt-5 border-t border-slate-100 pt-4">
+      <div className="mt-5 border-t border-neutral-800/80 pt-4">
         <span
           className={`text-xs font-semibold ${
             topic.status === "COMPLETED"
-              ? "text-green-600"
+              ? "text-yellow-400"
               : topic.status === "IN_PROGRESS"
-              ? "text-amber-600"
-              : "text-slate-500"
+              ? "text-amber-400"
+              : "text-neutral-500"
           }`}
         >
           {getStatusLabel()}

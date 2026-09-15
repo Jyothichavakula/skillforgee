@@ -179,3 +179,120 @@ export const getAdminDashboard = async () => {
     recentJobs,
   };
 };
+
+// ========================================
+// ADMIN USER MANAGEMENT
+// ========================================
+
+export interface GetAdminUsersParams {
+  search?: string;
+  role?: "STUDENT" | "RECRUITER" | "ADMIN";
+  status?: "ACTIVE" | "INACTIVE";
+}
+
+
+// Get all users for admin
+export const getAdminUsers = async (
+  params: GetAdminUsersParams = {}
+) => {
+  const {
+    search,
+    role,
+    status,
+  } = params;
+
+  const filter: Record<string, unknown> = {};
+
+  // Filter by role
+  if (role) {
+    filter.role = role;
+  }
+
+  // Filter by active status
+  if (status === "ACTIVE") {
+    filter.isActive = true;
+  }
+
+  if (status === "INACTIVE") {
+    filter.isActive = false;
+  }
+
+  // Search by name or email
+  if (search) {
+    filter.$or = [
+      {
+        firstName: {
+          $regex: search,
+          $options: "i",
+        },
+      },
+      {
+        lastName: {
+          $regex: search,
+          $options: "i",
+        },
+      },
+      {
+        email: {
+          $regex: search,
+          $options: "i",
+        },
+      },
+    ];
+  }
+
+  return User.find(filter)
+    .select(
+      "firstName lastName email role university degree branch graduationYear skills phone isActive createdAt updatedAt"
+    )
+    .sort({
+      createdAt: -1,
+    })
+    .lean();
+};
+
+
+// Get one user
+export const getAdminUserById = async (
+  userId: string
+) => {
+  const user = await User.findById(userId)
+    .select(
+      "firstName lastName email role university degree branch graduationYear skills phone isActive createdAt updatedAt"
+    )
+    .lean();
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  return user;
+};
+
+
+// Activate / deactivate user
+export const updateAdminUserStatus = async (
+  userId: string,
+  isActive: boolean
+) => {
+  const user =
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        isActive,
+      },
+      {
+        new: true,
+      }
+    )
+      .select(
+        "firstName lastName email role university degree branch graduationYear skills phone isActive createdAt updatedAt"
+      )
+      .lean();
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  return user;
+};

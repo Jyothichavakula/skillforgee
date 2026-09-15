@@ -13,14 +13,10 @@ const getGeminiClient = (): GoogleGenAI => {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    throw new Error(
-      "GEMINI_API_KEY is not defined"
-    );
+    throw new Error("GEMINI_API_KEY is not defined");
   }
 
-  return new GoogleGenAI({
-    apiKey,
-  });
+  return new GoogleGenAI({ apiKey });
 };
 
 export const generateAIResponse = async (
@@ -28,31 +24,28 @@ export const generateAIResponse = async (
 ): Promise<AIResponse> => {
   const client = getGeminiClient();
 
-  const systemMessage = messages.find(
-    (message) => message.role === "system"
-  );
+  // Extract system message to use as systemInstruction
+  const systemMessage = messages.find((m) => m.role === "system");
 
-  const conversationMessages = messages
-    .filter(
-      (message) => message.role !== "system"
-    )
-    .map(
-      (message) =>
-        `${message.role.toUpperCase()}: ${message.content}`
-    )
-    .join("\n\n");
+  // Build the conversation contents — only user/assistant turns
+  const conversationTurns = messages.filter((m) => m.role !== "system");
 
-  const prompt = `
-${systemMessage?.content ?? ""}
+  // Map to the SDK's Content format (role: "user" | "model")
+  const contents = conversationTurns.map((m) => ({
+    role: m.role === "assistant" ? "model" : "user",
+    parts: [{ text: m.content }],
+  }));
 
-${conversationMessages}
-`;
-
-  const response =
-    await client.models.generateContent({
-      model: "gemini-3.5-flash-lite",
-      contents: prompt,
-    });
+  const response = await client.models.generateContent({
+    // Updated to the currently available model
+    model: "gemini-3.6-flash",
+    contents,
+    config: systemMessage?.content
+      ? {
+          systemInstruction: systemMessage.content,
+        }
+      : undefined,
+  });
 
   return {
     content: response.text ?? "",

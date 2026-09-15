@@ -18,10 +18,10 @@ function JobFilters({
   onJobTypeChange,
 }: JobFiltersProps) {
   return (
-    <div className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 md:grid-cols-3">
+    <div className="grid gap-6 rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm md:grid-cols-3">
       {/* Search */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">
+        <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral-400">
           Search
         </label>
 
@@ -32,13 +32,13 @@ function JobFilters({
             onSearchChange(e.target.value)
           }
           placeholder="Search jobs..."
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-indigo-500"
+          className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
         />
       </div>
 
       {/* Location */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">
+        <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral-400">
           Location
         </label>
 
@@ -49,13 +49,13 @@ function JobFilters({
             onLocationChange(e.target.value)
           }
           placeholder="e.g. Hyderabad"
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-indigo-500"
+          className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
         />
       </div>
 
       {/* Job Type */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">
+        <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-neutral-400">
           Job Type
         </label>
 
@@ -66,7 +66,7 @@ function JobFilters({
               e.target.value as JobType | ""
             )
           }
-          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-indigo-500"
+          className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 px-4 py-3 text-sm text-white outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/20"
         >
           <option value="">All Types</option>
           <option value="FULL_TIME">

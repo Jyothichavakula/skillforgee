@@ -9,8 +9,8 @@
     "Segoe UI",
     sans-serif;
 
-  color: #111827;
-  background: #f8fafc;
+  color: #ffffff;
+  background: #09090b;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,7 +28,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f8fafc;
+  background: #09090b;
+  color: #ffffff;
 }
 
 button,
@@ -36,4 +37,28 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+/* Custom glow and scrollbar utilities */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121215;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}
+
+::selection {
+  background-color: #facc15;
+  color: #000000;
 }

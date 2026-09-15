@@ -14,7 +14,6 @@ import CodingProgressCard from "../../components/dashboard/CodingProgressCard";
 import RoadmapProgressCard from "../../components/dashboard/RoadmapProgressCard";
 import ProgressChart from "../../components/dashboard/ProgressChart";
 
-
 import { useApplications } from "../../hooks/useApplications";
 import { useGamification } from "../../hooks/useGamification";
 import { useProblems } from "../../hooks/useProblems";
@@ -23,6 +22,7 @@ import GamificationCard from "../../components/dashboard/GamificationCard";
 import RecentApplications from "../../components/dashboard/RecentApplications";
 import RecommendedProblems from "../../components/dashboard/RecommendedProblems";
 import QuickActions from "../../components/dashboard/QuickActions";
+
 function StudentDashboard() {
   const user = useAppSelector(
     (state) => state.auth.user
@@ -36,45 +36,38 @@ function StudentDashboard() {
   } = useDashboard();
 
   const {
-  data: applicationsData,
-} = useApplications();
+    data: applicationsData,
+  } = useApplications();
 
-const {
-  data: gamificationData,
-} = useGamification();
+  const {
+    data: gamificationData,
+  } = useGamification();
 
-const {
-  data: problemsData,
-} = useProblems();
-
-
-
-
-
+  const {
+    data: problemsData,
+  } = useProblems();
 
   if (isLoading) {
     return (
       <div className="space-y-8">
         <div>
-          <div className="h-4 w-32 animate-pulse rounded bg-slate-200" />
-
-          <div className="mt-3 h-9 w-72 animate-pulse rounded bg-slate-200" />
-
-          <div className="mt-3 h-5 w-full max-w-2xl animate-pulse rounded bg-slate-200" />
+          <div className="h-4 w-32 animate-pulse rounded bg-neutral-900" />
+          <div className="mt-3 h-9 w-72 animate-pulse rounded bg-neutral-900" />
+          <div className="mt-3 h-5 w-full max-w-2xl animate-pulse rounded bg-neutral-900" />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {[1, 2, 3, 4].map((item) => (
             <div
               key={item}
-              className="h-40 animate-pulse rounded-2xl bg-white shadow-sm"
+              className="h-40 animate-pulse rounded-2xl border border-neutral-800 bg-[#121215]"
             />
           ))}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="h-72 animate-pulse rounded-2xl bg-white shadow-sm" />
-          <div className="h-72 animate-pulse rounded-2xl bg-white shadow-sm" />
+          <div className="h-72 animate-pulse rounded-2xl border border-neutral-800 bg-[#121215]" />
+          <div className="h-72 animate-pulse rounded-2xl border border-neutral-800 bg-[#121215]" />
         </div>
       </div>
     );
@@ -83,23 +76,22 @@ const {
   if (isError || !data) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="max-w-md rounded-2xl border border-red-200 bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-50 text-lg font-bold text-red-500">
+        <div className="max-w-md rounded-2xl border border-red-500/20 bg-[#121215] p-8 text-center shadow-xl">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-lg font-bold text-red-400">
             !
           </div>
 
-          <h2 className="mt-4 text-xl font-bold text-slate-900">
+          <h2 className="mt-4 text-xl font-bold text-white">
             Unable to load dashboard
           </h2>
 
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            We couldn't retrieve your dashboard
-            information.
+          <p className="mt-2 text-sm leading-6 text-neutral-400">
+            We couldn't retrieve your dashboard information.
           </p>
 
           <button
             onClick={() => refetch()}
-            className="mt-6 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            className="mt-6 rounded-xl bg-yellow-400 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-yellow-300 shadow-md shadow-yellow-500/20"
           >
             Try Again
           </button>
@@ -154,45 +146,38 @@ const {
     <div className="space-y-8">
       {/* Header */}
       <section>
-        <p className="text-sm font-medium text-indigo-600">
+        <p className="text-xs font-bold uppercase tracking-wider text-yellow-400">
           Student Workspace
         </p>
 
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white">
           Your Career Dashboard
         </h1>
 
-        <p className="mt-2 text-slate-500">
-          Track your placement preparation,
-          coding progress, applications, and
-          career growth in one place.
+        <p className="mt-2 text-sm text-neutral-400">
+          Track your placement preparation, coding progress, applications, and career growth in one place.
         </p>
       </section>
 
       {/* Welcome */}
-      <section className="overflow-hidden rounded-2xl bg-slate-950 p-6 text-white shadow-sm">
+      <section className="overflow-hidden rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 text-white shadow-lg">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <p className="text-sm text-indigo-300">
+            <p className="text-xs font-semibold uppercase tracking-wider text-yellow-400">
               Welcome back
             </p>
 
-            <h2 className="mt-1 text-2xl font-bold">
-              {user?.firstName}{" "}
-              {user?.lastName} 👋
+            <h2 className="mt-1 text-2xl font-bold tracking-tight text-white">
+              {user?.firstName} {user?.lastName} 👋
             </h2>
 
-            <p className="mt-2 max-w-xl text-sm leading-6 text-slate-400">
-              Keep building your skills and
-              preparing for your next
-              opportunity.
+            <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-400">
+              Keep building your skills and preparing for your next high-impact career opportunity.
             </p>
           </div>
 
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-indigo-500 text-2xl font-bold">
-            {user?.firstName
-              ?.charAt(0)
-              .toUpperCase() || "S"}
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 text-2xl font-extrabold text-black shadow-lg shadow-yellow-500/20">
+            {user?.firstName?.charAt(0).toUpperCase() || "S"}
           </div>
         </div>
       </section>
@@ -279,50 +264,35 @@ const {
         total={totalProblems}
       />
 
-     {/* Gamification */}
-<GamificationCard
-  xp={gamificationData?.xp ?? 0}
-  level={gamificationData?.level ?? 1}
-  problemsSolved={
-    gamificationData?.problemsSolved ?? 0
-  }
-  achievements={
-    gamificationData?.achievements?.length ?? 0
-  }
-/>
+      {/* Gamification */}
+      <GamificationCard
+        xp={gamificationData?.xp ?? 0}
+        level={gamificationData?.level ?? 1}
+        problemsSolved={
+          gamificationData?.problemsSolved ?? 0
+        }
+        achievements={
+          gamificationData?.achievements?.length ?? 0
+        }
+      />
 
-<section className="grid gap-6 xl:grid-cols-2">
-  <RecentApplications
-    applications={
-      applicationsData ?? []
-    }
-  />
+      {/* Applications + Problems */}
+      <section className="grid gap-6 xl:grid-cols-2">
+        <RecentApplications
+          applications={
+            applicationsData ?? []
+          }
+        />
 
-  <RecommendedProblems
-    problems={
-      problemsData?.problems ?? []
-    }
-  />
-</section>
+        <RecommendedProblems
+          problems={
+            problemsData?.problems ?? []
+          }
+        />
+      </section>
 
-
-{/* Applications + Problems */}
-<section className="grid gap-6 xl:grid-cols-2">
-  <RecentApplications
-    applications={
-      applicationsData ?? []
-    }
-  />
-
-  <RecommendedProblems
-    problems={
-      problemsData?.problems ?? []
-    }
-  />
-</section>
-
-{/* Quick Actions */}
-<QuickActions />
+      {/* Quick Actions */}
+      <QuickActions />
     </div>
   );
 }

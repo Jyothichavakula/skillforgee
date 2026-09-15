@@ -45,13 +45,12 @@ function QuickActions() {
   return (
     <section>
       <div>
-        <h2 className="text-xl font-bold text-slate-900">
+        <h2 className="text-xl font-bold tracking-tight text-white">
           Continue Your Preparation
         </h2>
 
-        <p className="mt-1 text-sm text-slate-500">
-          Choose an area and keep moving toward
-          your placement goals.
+        <p className="mt-1 text-sm text-neutral-400">
+          Choose an area and keep moving toward your placement goals.
         </p>
       </div>
 
@@ -65,24 +64,24 @@ function QuickActions() {
               onClick={() =>
                 navigate(action.path)
               }
-              className="group rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
+              className="group rounded-2xl border border-neutral-800/90 bg-[#121215] p-5 text-left shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-yellow-400/50 hover:shadow-lg hover:shadow-yellow-500/10"
             >
               <div className="flex items-center justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 group-hover:bg-yellow-400/20 group-hover:border-yellow-400/40 transition">
                   <Icon size={20} />
                 </div>
 
                 <ArrowRight
                   size={17}
-                  className="text-slate-300 transition group-hover:translate-x-1 group-hover:text-indigo-500"
+                  className="text-neutral-500 transition group-hover:translate-x-1 group-hover:text-yellow-400"
                 />
               </div>
 
-              <h3 className="mt-4 font-semibold text-slate-900">
+              <h3 className="mt-4 font-semibold text-white group-hover:text-yellow-400 transition">
                 {action.title}
               </h3>
 
-              <p className="mt-2 text-sm leading-6 text-slate-500">
+              <p className="mt-2 text-sm leading-6 text-neutral-400">
                 {action.description}
               </p>
             </button>

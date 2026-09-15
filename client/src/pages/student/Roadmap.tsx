@@ -3,7 +3,6 @@ import {
 } from "../../hooks/useRoadmap";
 
 import RoadmapSummary from "../../components/roadmap/RoadmapSummary";
-
 import RoadmapTopicCard from "../../components/roadmap/RoadmapTopicCard";
 
 function Roadmap() {
@@ -18,18 +17,16 @@ function Roadmap() {
     <div className="space-y-8">
       {/* Header */}
       <section>
-        <p className="text-sm font-medium text-indigo-600">
+        <p className="text-xs font-bold uppercase tracking-wider text-yellow-400">
           Your Learning Journey
         </p>
 
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white">
           Learning Roadmap
         </h1>
 
-        <p className="mt-2 max-w-2xl text-slate-500">
-          Build your technical skills step by
-          step and track your interview
-          preparation progress.
+        <p className="mt-2 max-w-2xl text-sm text-neutral-400">
+          Build your technical skills step by step and track your interview preparation progress.
         </p>
       </section>
 
@@ -40,7 +37,7 @@ function Roadmap() {
             {[1, 2, 3].map((item) => (
               <div
                 key={item}
-                className="h-28 animate-pulse rounded-2xl bg-white shadow-sm"
+                className="h-28 animate-pulse rounded-2xl border border-neutral-800 bg-[#121215]"
               />
             ))}
           </div>
@@ -49,7 +46,7 @@ function Roadmap() {
             {[1, 2, 3, 4].map((item) => (
               <div
                 key={item}
-                className="h-64 animate-pulse rounded-2xl bg-white shadow-sm"
+                className="h-64 animate-pulse rounded-2xl border border-neutral-800 bg-[#121215]"
               />
             ))}
           </div>
@@ -58,19 +55,18 @@ function Roadmap() {
 
       {/* Error */}
       {isError && (
-        <div className="rounded-2xl border border-red-200 bg-white p-10 text-center">
-          <h2 className="text-xl font-bold text-slate-900">
+        <div className="rounded-2xl border border-red-500/20 bg-[#121215] p-10 text-center shadow-xl">
+          <h2 className="text-xl font-bold text-white">
             Unable to load your roadmap
           </h2>
 
-          <p className="mt-2 text-sm text-slate-500">
-            Something went wrong while loading
-            your learning roadmap.
+          <p className="mt-2 text-sm text-neutral-400">
+            Something went wrong while loading your learning roadmap.
           </p>
 
           <button
             onClick={() => refetch()}
-            className="mt-5 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            className="mt-5 rounded-xl bg-yellow-400 px-5 py-2.5 text-sm font-bold text-black transition hover:bg-yellow-300 shadow-md shadow-yellow-500/20"
           >
             Try Again
           </button>
@@ -87,26 +83,24 @@ function Roadmap() {
             />
 
             {roadmap.topics.length === 0 ? (
-              <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center">
-                <h2 className="text-xl font-bold text-slate-900">
+              <div className="rounded-2xl border border-neutral-800 bg-[#121215] p-12 text-center">
+                <h2 className="text-xl font-bold text-white">
                   Your roadmap is waiting
                 </h2>
 
-                <p className="mt-2 text-sm text-slate-500">
-                  Start solving coding problems
-                  to build your learning roadmap.
+                <p className="mt-2 text-sm text-neutral-400">
+                  Start solving coding problems to build your personalized learning roadmap.
                 </p>
               </div>
             ) : (
               <section>
                 <div className="mb-5">
-                  <h2 className="text-xl font-bold text-slate-900">
+                  <h2 className="text-xl font-bold tracking-tight text-white">
                     Learning Topics
                   </h2>
 
-                  <p className="mt-1 text-sm text-slate-500">
-                    Track your progress across
-                    important technical topics.
+                  <p className="mt-1 text-sm text-neutral-400">
+                    Track your progress across important technical topics.
                   </p>
                 </div>
 

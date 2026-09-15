@@ -2,6 +2,7 @@ import {
   Code2,
   ArrowRight,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import type {
   Problem,
@@ -14,43 +15,41 @@ interface RecommendedProblemsProps {
 function RecommendedProblems({
   problems,
 }: RecommendedProblemsProps) {
+  const navigate = useNavigate();
   const recommended =
     problems.slice(0, 5);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold tracking-tight text-white">
             Recommended Problems
           </h2>
 
-          <p className="mt-1 text-sm text-slate-500">
-            Problems to continue your coding
-            preparation.
+          <p className="mt-1 text-sm text-neutral-400">
+            Problems to continue your coding preparation.
           </p>
         </div>
 
-        <Code2
-          size={21}
-          className="text-indigo-600"
-        />
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+          <Code2 size={20} />
+        </div>
       </div>
 
       {recommended.length === 0 ? (
         <div className="py-10 text-center">
           <Code2
             size={32}
-            className="mx-auto text-slate-300"
+            className="mx-auto text-neutral-600"
           />
 
-          <p className="mt-3 text-sm font-medium text-slate-600">
+          <p className="mt-3 text-sm font-medium text-neutral-300">
             No problems available
           </p>
 
-          <p className="mt-1 text-xs text-slate-400">
-            Check back after problems are added
-            to your practice list.
+          <p className="mt-1 text-xs text-neutral-500">
+            Check back after problems are added to your practice list.
           </p>
         </div>
       ) : (
@@ -59,10 +58,10 @@ function RecommendedProblems({
             (problem) => (
               <div
                 key={problem._id}
-                className="flex items-center justify-between gap-4 rounded-xl bg-slate-50 p-4 transition hover:bg-slate-100"
+                className="flex items-center justify-between gap-4 rounded-xl border border-neutral-800/80 bg-neutral-900/60 p-4 transition hover:border-yellow-400/30 hover:bg-neutral-900"
               >
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-slate-900">
+                  <p className="truncate text-sm font-semibold text-white">
                     {problem.title}
                   </p>
 
@@ -78,7 +77,7 @@ function RecommendedProblems({
                       .map((topic) => (
                         <span
                           key={topic}
-                          className="rounded-full bg-white px-2 py-1 text-[11px] font-medium text-slate-500"
+                          className="rounded-full border border-neutral-800 bg-neutral-950 px-2.5 py-0.5 text-[11px] font-medium text-neutral-400"
                         >
                           {topic}
                         </span>
@@ -86,7 +85,10 @@ function RecommendedProblems({
                   </div>
                 </div>
 
-                <button className="flex shrink-0 items-center gap-1 rounded-lg px-3 py-2 text-xs font-semibold text-indigo-600 transition hover:bg-indigo-50">
+                <button
+                  onClick={() => navigate(`/student/coding/${problem._id}`)}
+                  className="flex shrink-0 items-center gap-1.5 rounded-lg bg-yellow-400/10 px-3 py-1.5 text-xs font-semibold text-yellow-400 border border-yellow-400/30 transition hover:bg-yellow-400 hover:text-black"
+                >
                   Solve
                   <ArrowRight size={14} />
                 </button>
@@ -109,18 +111,18 @@ function DifficultyBadge({
     string
   > = {
     EASY:
-      "bg-green-50 text-green-600",
+      "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30",
     MEDIUM:
-      "bg-yellow-50 text-yellow-600",
+      "bg-yellow-400/15 text-yellow-400 border border-yellow-400/30",
     HARD:
-      "bg-red-50 text-red-600",
+      "bg-red-500/15 text-red-400 border border-red-500/30",
   };
 
   return (
     <span
-      className={`rounded-full px-2 py-1 text-[11px] font-semibold ${
+      className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
         styles[difficulty] ||
-        "bg-slate-100 text-slate-500"
+        "bg-neutral-800 text-neutral-400"
       }`}
     >
       {difficulty}

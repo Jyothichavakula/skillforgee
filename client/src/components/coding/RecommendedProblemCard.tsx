@@ -1,92 +1,57 @@
-import {
-  ArrowRight,
-  Building2,
-  Tag,
-} from "lucide-react";
-
-import {
-  useNavigate,
-} from "react-router-dom";
-
-import type {
-  Problem,
-} from "../../api/problem.api";
+import { Link } from "react-router-dom";
+import { ArrowRight, Star, Clock } from "lucide-react";
+import type { Problem } from "../../api/problem.api";
 
 interface RecommendedProblemCardProps {
   problem: Problem;
 }
 
-function RecommendedProblemCard({
-  problem,
-}: RecommendedProblemCardProps) {
-  const navigate = useNavigate();
-
-  const difficultyClass =
-    problem.difficulty === "EASY"
-      ? "bg-green-50 text-green-700"
-      : problem.difficulty === "MEDIUM"
-      ? "bg-amber-50 text-amber-700"
-      : "bg-red-50 text-red-700";
-
+function RecommendedProblemCard({ problem }: RecommendedProblemCardProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-indigo-500">
-            Recommended for you
-          </p>
-
-          <h3 className="mt-1 text-base font-bold text-slate-900">
-            {problem.title}
-          </h3>
+    <Link
+      to={`/student/coding/${problem._id}`}
+      className="group flex flex-col justify-between rounded-2xl border border-yellow-500/20 bg-gradient-to-br from-yellow-500/10 to-transparent p-5 shadow-sm transition hover:border-yellow-500/40 hover:bg-yellow-500/10 hover:shadow-md"
+    >
+      <div>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="inline-flex items-center gap-1 rounded-full bg-yellow-500/10 px-2.5 py-1 text-xs font-semibold text-yellow-500">
+            <Star className="h-3 w-3" />
+            Recommended
+          </div>
+          
+          <div
+            className={`text-xs font-bold ${
+              problem.difficulty === "EASY"
+                ? "text-green-500"
+                : problem.difficulty === "MEDIUM"
+                ? "text-yellow-500"
+                : "text-red-500"
+            }`}
+          >
+            {problem.difficulty}
+          </div>
         </div>
 
-        <span
-          className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${difficultyClass}`}
-        >
-          {problem.difficulty}
-        </span>
+        <h4 className="mb-2 text-lg font-bold text-white transition group-hover:text-yellow-400">
+          {problem.title}
+        </h4>
+        
+        <p className="line-clamp-2 text-sm text-neutral-400">
+          {problem.description || "A recommended problem to help you improve your skills based on your current roadmap."}
+        </p>
       </div>
 
-      {problem.topics.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-2">
-          {problem.topics.slice(0, 3).map(
-            (topic) => (
-              <span
-                key={topic}
-                className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600"
-              >
-                <Tag size={12} />
-                {topic}
-              </span>
-            )
-          )}
+      <div className="mt-5 flex items-center justify-between text-sm">
+        <div className="flex items-center gap-1.5 text-neutral-500">
+          <Clock className="h-4 w-4" />
+          <span>Practice now</span>
         </div>
-      )}
-
-      {problem.companyTags.length > 0 && (
-        <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-500">
-          <Building2 size={13} />
-
-          {problem.companyTags
-            .slice(0, 3)
-            .join(", ")}
+        
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-800 text-white transition group-hover:bg-yellow-500 group-hover:text-black">
+          <ArrowRight className="h-4 w-4" />
         </div>
-      )}
-
-      <button
-        type="button"
-        onClick={() =>
-          navigate(
-            `/student/coding/${problem._id}`
-          )
-        }
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-indigo-600"
-      >
-        Practice Problem
-        <ArrowRight size={15} />
-      </button>
-    </div>
+      </div>
+    </Link>
   );
 }
 

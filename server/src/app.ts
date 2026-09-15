@@ -41,7 +41,20 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = (
+        process.env.CLIENT_URL || "http://localhost:5173,http://localhost:5174"
+      ).split(",").map((o) => o.trim());
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
@@ -85,57 +98,17 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/companies", companyRoutes);
 app.use("/api/v1/jobs", jobRoutes);
 app.use("/api/v1/applications", applicationRoutes);
-
-app.use(
-  "/api/v1/problems/recommended",
-  problemRecommendationRoutes
-);
-
 app.use("/api/v1/problems", problemRoutes);
-
-app.use(
-  "/api/v1/problem-progress",
-  problemProgressRoutes
-);
-app.use(
-  "/api/v1/roadmap",
-  roadmapRoutes
-);
-
-app.use(
-  "/api/v1/notifications",
-  notificationRoutes
-);
-app.use(
-  "/api/v1/gamification",
-  gamificationRoutes
-);
-
-app.use(
-  "/api/v1/recruiter",
-  recruiterRoutes
-);
+app.use("/api/v1/problem-progress", problemProgressRoutes);
+app.use("/api/v1/roadmap", roadmapRoutes);
+app.use("/api/v1/analytics", analyticsRoutes);
+app.use("/api/v1/discussions", discussionRoutes);
+app.use("/api/v1/notifications", notificationRoutes);
+app.use("/api/v1/gamification", gamificationRoutes);
+app.use("/api/v1/recruiter", recruiterRoutes);
 app.use("/api/v1/admin", adminRoutes);
-
-app.use(
-  "/api/v1/career-coach",
-  careerCoachRoutes
-);
-
-app.use(
-  "/api/v1/resume",
-  resumeAnalyzerRoutes
-);
-
-app.use(
-  "/api/v1/analytics",
-  analyticsRoutes
-);
-app.use(
-  "/api/v1/discussions",
-  discussionRoutes
-);
-
+app.use("/api/v1/career-coach", careerCoachRoutes);
+app.use("/api/v1/resume", resumeAnalyzerRoutes);
 app.use((_req, res) => {
   res.status(404).json({
     success: false,

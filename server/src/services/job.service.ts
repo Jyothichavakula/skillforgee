@@ -87,6 +87,19 @@ export const getJobs = async () => {
     });
 };
 
+export const getMyJobs = async (userId: string) => {
+  return Job.find({ createdBy: userId })
+    .populate(
+      "companyId",
+      "name logo industry location"
+    )
+    .populate(
+      "createdBy",
+      "firstName lastName email"
+    )
+    .sort({ createdAt: -1 });
+};
+
 // ========================================
 // GET JOB BY ID
 // ========================================
@@ -209,3 +222,5 @@ export const deleteJob = async (
 
   return job;
 };
+
+

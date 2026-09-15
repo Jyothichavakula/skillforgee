@@ -5,26 +5,21 @@ import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
 
 function StudentLayout() {
-  const [sidebarOpen, setSidebarOpen] =
-    useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#09090b] text-white">
       {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}
-        onClose={() =>
-          setSidebarOpen(false)
-        }
+        onClose={() => setSidebarOpen(false)}
       />
 
       {/* Main Area */}
       <div className="lg:pl-72">
         {/* Navbar */}
         <Navbar
-          onMenuClick={() =>
-            setSidebarOpen(true)
-          }
+          onMenuClick={() => setSidebarOpen(true)}
         />
 
         {/* Page Content */}

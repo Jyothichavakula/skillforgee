@@ -45,15 +45,14 @@ function ApplicationStatusCard({
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm">
       <div>
-        <h2 className="text-xl font-bold text-slate-900">
+        <h2 className="text-xl font-bold tracking-tight text-white">
           Application Overview
         </h2>
 
-        <p className="mt-1 text-sm text-slate-500">
-          Track the current status of your job
-          applications.
+        <p className="mt-1 text-sm text-neutral-400">
+          Track the current status of your job applications.
         </p>
       </div>
 
@@ -61,13 +60,13 @@ function ApplicationStatusCard({
         {statuses.map((status) => (
           <div
             key={status.key}
-            className="rounded-xl bg-slate-50 p-4"
+            className="rounded-xl border border-neutral-800/80 bg-neutral-900/60 p-4 transition hover:border-yellow-400/30"
           >
-            <p className="text-xs text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">
               {status.label}
             </p>
 
-            <p className="mt-1 text-2xl font-bold text-slate-900">
+            <p className="mt-1.5 text-2xl font-bold text-yellow-400">
               {values[status.key]}
             </p>
           </div>

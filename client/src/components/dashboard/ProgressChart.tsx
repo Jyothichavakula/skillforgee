@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Cell,
 } from "recharts";
 
 interface ProgressChartProps {
@@ -13,6 +14,8 @@ interface ProgressChartProps {
   attempted: number;
   total: number;
 }
+
+const BAR_COLORS = ["#facc15", "#eab308", "#3f3f46"];
 
 function ProgressChart({
   solved,
@@ -43,13 +46,13 @@ function ProgressChart({
   ];
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-neutral-800/90 bg-[#121215] p-6 shadow-sm">
       <div>
-        <h2 className="text-xl font-bold text-slate-900">
+        <h2 className="text-xl font-bold tracking-tight text-white">
           Coding Overview
         </h2>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-neutral-400">
           Breakdown of your coding practice.
         </p>
       </div>
@@ -70,6 +73,7 @@ function ProgressChart({
           >
             <CartesianGrid
               strokeDasharray="3 3"
+              stroke="#27272a"
               vertical={false}
             />
 
@@ -77,6 +81,7 @@ function ProgressChart({
               dataKey="name"
               tick={{
                 fontSize: 12,
+                fill: "#a1a1aa",
               }}
               axisLine={false}
               tickLine={false}
@@ -86,26 +91,33 @@ function ProgressChart({
               allowDecimals={false}
               tick={{
                 fontSize: 12,
+                fill: "#a1a1aa",
               }}
               axisLine={false}
               tickLine={false}
             />
 
             <Tooltip
+              contentStyle={{
+                backgroundColor: "#18181b",
+                borderColor: "#3f3f46",
+                borderRadius: "0.75rem",
+                color: "#ffffff",
+              }}
+              itemStyle={{ color: "#facc15" }}
               cursor={{
-                fill: "rgba(99, 102, 241, 0.05)",
+                fill: "rgba(250, 204, 21, 0.05)",
               }}
             />
 
             <Bar
               dataKey="value"
-              radius={[
-                6,
-                6,
-                0,
-                0,
-              ]}
-            />
+              radius={[6, 6, 0, 0]}
+            >
+              {data.map((_, index) => (
+                <Cell key={`cell-${index}`} fill={BAR_COLORS[index % BAR_COLORS.length]} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>

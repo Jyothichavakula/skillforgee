@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Search, MapPin, Briefcase } from "lucide-react";
 
 import type {
   JobType,
@@ -10,14 +11,9 @@ import JobCard from "../../components/jobs/JobCard";
 import JobFilters from "../../components/jobs/JobFilters";
 
 function Jobs() {
-  const [search, setSearch] =
-    useState("");
-
-  const [location, setLocation] =
-    useState("");
-
-  const [jobType, setJobType] =
-    useState<JobType | "">("");
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
+  const [jobType, setJobType] = useState<JobType | "">("");
 
   const {
     data,
@@ -26,28 +22,26 @@ function Jobs() {
     refetch,
   } = useJobs({
     search: search || undefined,
-    location:
-      location || undefined,
-    jobType:
-      jobType || undefined,
+    location: location || undefined,
+    jobType: jobType || undefined,
     status: "OPEN",
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 max-w-7xl mx-auto p-4 pb-20 md:p-6 lg:p-8">
       {/* Header */}
-      <section>
-        <p className="text-sm font-medium text-indigo-600">
+      <section className="border-b border-neutral-800 pb-6">
+        <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-yellow-500 mb-2">
+          <Briefcase className="h-4 w-4" />
           Opportunities
         </p>
 
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-extrabold tracking-tight text-white">
           Find Your Next Opportunity
         </h1>
 
-        <p className="mt-2 text-slate-500">
-          Discover jobs and internships that
-          match your skills and career goals.
+        <p className="mt-2 text-lg text-neutral-400">
+          Discover jobs and internships that match your skills and career goals.
         </p>
       </section>
 
@@ -63,12 +57,12 @@ function Jobs() {
 
       {/* Results */}
       {isLoading && (
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           {[1, 2, 3, 4].map(
             (item) => (
               <div
                 key={item}
-                className="h-64 animate-pulse rounded-2xl bg-white shadow-sm"
+                className="h-64 animate-pulse rounded-2xl bg-[#121215] border border-neutral-800/90 shadow-sm"
               />
             )
           )}
@@ -76,18 +70,18 @@ function Jobs() {
       )}
 
       {isError && (
-        <div className="rounded-2xl border border-red-200 bg-white p-8 text-center">
-          <h2 className="text-lg font-bold text-slate-900">
+        <div className="rounded-2xl border border-red-500/20 bg-[#121215] p-10 text-center">
+          <h2 className="text-xl font-bold text-white">
             Unable to load jobs
           </h2>
 
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-neutral-400">
             Please try again.
           </p>
 
           <button
             onClick={() => refetch()}
-            className="mt-5 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white"
+            className="mt-6 rounded-xl bg-yellow-500 px-6 py-2.5 text-sm font-extrabold text-black transition hover:bg-yellow-400"
           >
             Try Again
           </button>
@@ -98,29 +92,40 @@ function Jobs() {
         !isError &&
         data && (
           <>
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                {data.jobs.length}{" "}
-                {data.jobs.length === 1
-                  ? "job"
-                  : "jobs"}{" "}
-                found
+            <div className="flex items-center justify-between border-b border-neutral-800/50 pb-4">
+              <p className="text-sm font-bold text-neutral-400">
+                <span className="text-white">{data.jobs.length}</span>{" "}
+                {data.jobs.length === 1 ? "job" : "jobs"} found
               </p>
             </div>
 
             {data.jobs.length === 0 ? (
-              <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center">
-                <h2 className="text-xl font-bold text-slate-900">
+              <div className="rounded-2xl border border-neutral-800/90 bg-[#121215] p-16 text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500">
+                  <Search className="h-8 w-8" />
+                </div>
+                <h2 className="text-xl font-bold text-white">
                   No jobs found
                 </h2>
 
-                <p className="mt-2 text-sm text-slate-500">
-                  Try changing your search or
-                  filters.
+                <p className="mt-2 text-sm text-neutral-400">
+                  Try changing your search or filters.
                 </p>
+                {(search || location || jobType) && (
+                  <button
+                    onClick={() => {
+                      setSearch("");
+                      setLocation("");
+                      setJobType("");
+                    }}
+                    className="mt-6 rounded-xl bg-neutral-800 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-neutral-700 hover:text-yellow-400"
+                  >
+                    Clear All Filters
+                  </button>
+                )}
               </div>
             ) : (
-              <div className="grid gap-5 lg:grid-cols-2">
+              <div className="grid gap-6 lg:grid-cols-2">
                 {data.jobs.map((job) => (
                   <JobCard
                     key={job._id}

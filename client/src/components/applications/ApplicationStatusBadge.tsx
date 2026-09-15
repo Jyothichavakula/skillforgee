@@ -17,31 +17,31 @@ function ApplicationStatusBadge({
     APPLIED: {
       label: "Applied",
       className:
-        "bg-blue-50 text-blue-700",
+        "bg-blue-500/10 text-blue-400 border border-blue-500/20",
     },
 
     SHORTLISTED: {
       label: "Shortlisted",
       className:
-        "bg-purple-50 text-purple-700",
+        "bg-purple-500/10 text-purple-400 border border-purple-500/20",
     },
 
     INTERVIEW: {
       label: "Interview",
       className:
-        "bg-amber-50 text-amber-700",
+        "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20",
     },
 
     SELECTED: {
       label: "Selected",
       className:
-        "bg-green-50 text-green-700",
+        "bg-green-500/10 text-green-400 border border-green-500/20",
     },
 
     REJECTED: {
       label: "Rejected",
       className:
-        "bg-red-50 text-red-700",
+        "bg-red-500/10 text-red-400 border border-red-500/20",
     },
   };
 
@@ -49,7 +49,7 @@ function ApplicationStatusBadge({
 
   return (
     <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${config.className}`}
+      className={`inline-flex rounded-full px-3 py-1 text-xs font-bold tracking-wide uppercase ${config.className}`}
     >
       {config.label}
     </span>

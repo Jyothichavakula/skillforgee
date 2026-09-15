@@ -179,6 +179,7 @@ await RefreshToken.create({
     skills: user.skills,
     lastLoginAt: user.lastLoginAt,
   },
+  
   accessToken,
   refreshToken,
 };
